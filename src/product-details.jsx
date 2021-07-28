@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
+import Loader from './Load-file/Loader';
 import "./Load-file/Loader.css";
 
 
-
 class ProductDetails extends Component {
-    componentWillUnmount() {
-        setTimeout(() => {
-            this.props.loaderUnloading();
-        }, 1000);
+    state = { loader: true };
+
+    componentDidMount() {
+
+        setTimeout(() => this.setState({ loader: false }), 1000);
     }
     render() {
+        
         return (
+            <>
+            {this.state.loader ? (
+                    <Loader></Loader>
+                ) : (
             <div
             
                 style={{
@@ -25,8 +31,14 @@ class ProductDetails extends Component {
 
                 <button onClick={this.props.backButton}>Return</button>
             </div>
-        );
+            
+            )}
+
+          </>
+        );  
     }
+
+
 }
 
 export default ProductDetails;

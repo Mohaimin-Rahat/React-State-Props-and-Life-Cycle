@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Loader.css';
 const Loader = () => {
     return (
         <div class="container">
@@ -7,8 +7,7 @@ const Loader = () => {
 	<div class="red"></div>
 	<div class="blue"></div>
 	<div class="violet"></div>
-</div>
-
+   </div>
     );
 };
 

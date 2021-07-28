@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Products from './products';
-import ProductDetails from './product-details';
-import "./Load-file/Loader.css";
-import Loader from './Load-file/Loader';
+import Products from "./products.jsx";
+import ProductDetails from "./product-details.jsx";
+import "./App.css";
+
 
 class App extends Component {
     state={
-      loader: false,
+      currentproduct:null,
       list: [
         {
           Name:'Coca-cola',
@@ -27,47 +27,38 @@ class App extends Component {
           Category: 'Cocolate'
         },
       ],
-      currentproduct:null,
+     
       
     };
-    componentDidMount() {
-      setTimeout(() => {
-          this.setState({ ...this.state, loader: true });
-      }, 1000);
-  }
+   
 
     selectProduct = (data) =>{
       this.setState({...this.state,currentproduct :data});
-      this.loaderLoading();
+      
     };
 
     backButton=()=>{
       this.setState({...this.State,currentproduct : null});
-      this.loaderLoading();
+      
     };
 
-    loaderLoading = () => {
-      this.setState((change) => ({ ...this.State,loader: !change.loader }));
-    };
-
-  loaderUnloading = () => {
-      this.setState((change) => ({...this.State,loader: !change.loader }));
-  };
-
+    
   render() {
     return (
       <div>
-        {this.state.loader ? (
-                    <Loader/>
-                ) : this.state.currentproduct ? (
-                  < Products list={this.state.list} 
+        { !this.state.currentproduct ? (
+                  < Products 
+                  list={this.state.list} 
                   selectProduct={this.selectProduct}
-                  loaderUnloading={this.loaderUnloading}/>
+               
+                 />
         
         ) : (
-          <ProductDetails currentproduct={this.state.currentproduct} 
+          <ProductDetails 
+          currentproduct={this.state.currentproduct} 
           backButton={this.backButton}
-          loaderUnloading={this.loaderUnloading}/>
+         
+          />
       
        )}
       </div>
