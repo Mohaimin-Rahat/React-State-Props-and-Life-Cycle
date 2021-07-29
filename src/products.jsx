@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import "./Load-file/Loader.css";
 import Loader from './Load-file/Loader';
 
-class Products extends Component {
-    state = { loader: true };
-    componentDidMount() {
-            setTimeout(() => this.setState({ loader: false }), 1000);
-    }
-    render() {
+const Products = ({ list, selectProduct }) => {
+
+    const [loader, setLoader] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => setLoader(false), 2000);
+    }, []);
+
         return (
             <>
-            {this.state.loader ? (
+            {loader ? (
                     <Loader></Loader>
                 ) : (
             <div>
-                {this.props.list.map((product) =>{
+                {list.map((product) =>{
                   return(
                      <div
                       style={{
@@ -22,7 +24,7 @@ class Products extends Component {
                         padding:'20px',
                         border:'1px solid green',
                     }}
-                        onClick={()=> this.props.selectProduct(product)}>
+                        onClick={()=>selectProduct(product)}>
                             <p>Product Name: {product.Name}</p>
                          </div>
                   )
@@ -32,7 +34,7 @@ class Products extends Component {
             )}
            </>   
         );
-    }
+    
 }
 
 export default Products;
