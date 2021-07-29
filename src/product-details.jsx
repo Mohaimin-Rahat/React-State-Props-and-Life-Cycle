@@ -8,7 +8,7 @@ class ProductDetails extends Component {
 
     componentDidMount() {
 
-        setTimeout(() => this.setState({ loader: false }), 1000);
+        setTimeout(() => this.setState({ loader: false }), 2000);
     }
     render() {
         
