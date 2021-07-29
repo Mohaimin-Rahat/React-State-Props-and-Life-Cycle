@@ -3,11 +3,12 @@ import './Loader.css';
 const Loader = () => {
     return (
         <div class="container">
-	<div class="yellow"></div>
-	<div class="red"></div>
-	<div class="blue"></div>
-	<div class="violet"></div>
-   </div>
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+</div>
+
+
     );
 };
 

@@ -19,8 +19,8 @@ class Products extends Component {
                      <div
                       style={{
                         marginBottom:'100 px',
-                        padding:'10px',
-                        border:'1px solid blue',
+                        padding:'20px',
+                        border:'1px solid green',
                     }}
                         onClick={()=> this.props.selectProduct(product)}>
                             <p>Product Name: {product.Name}</p>

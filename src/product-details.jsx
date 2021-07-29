@@ -22,7 +22,7 @@ class ProductDetails extends Component {
                 style={{
                         marginBottom:'100 px',
                         padding:'50px',
-                        border:'1px solid blue',
+                        border:'1px solid green',
                     }}>
                 <p>Product Name: {this.props.currentproduct?.Name }</p>
                 <p>Product Description: {this.props.currentproduct?.Description }</p>
