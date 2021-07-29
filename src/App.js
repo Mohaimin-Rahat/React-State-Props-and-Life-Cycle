@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import { useState } from "react";
 import Products from "./products.jsx";
 import ProductDetails from "./product-details.jsx";
 import "./App.css";
 
-
-class App extends Component {
-    state={
-      currentproduct:null,
-      list: [
+function App() {
+  const [ list, setList] = useState(
+       [
         {
           Name:'Coca-cola',
           Description:'2 Liters',
@@ -26,45 +24,34 @@ class App extends Component {
           Price: '85',
           Category: 'Cocolate'
         },
-      ],
-     
-      
-    };
-   
+      ] 
+  );
+  const [currentproduct, setCurrentProduct] = useState(null);
 
-    selectProduct = (data) =>{
-      this.setState({...this.state,currentproduct :data});
-      
-    };
-
-    backButton=()=>{
-      this.setState({...this.State,currentproduct : null});
-      
-    };
-
-    
-  render() {
+    const selectProduct = (product) => {
+      setCurrentProduct(product);
+  };
+    const backButton = () => {
+      setCurrentProduct(null);
+  };
     return (
       <div>
-        { !this.state.currentproduct ? (
-                  < Products 
-                  list={this.state.list} 
-                  selectProduct={this.selectProduct}
-               
-                 />
-        
-        ) : (
+        { currentproduct ? (
           <ProductDetails 
-          currentproduct={this.state.currentproduct} 
-          backButton={this.backButton}
-         
+                        currentproduct={currentproduct} 
+                        backButton={backButton}
           />
-      
+        ) : (
+          < Products 
+                  list={list} 
+                  selectProduct={selectProduct}    
+         />
        )}
       </div>
     );
-  }
+  
 }
 
 
 export default App;
+
