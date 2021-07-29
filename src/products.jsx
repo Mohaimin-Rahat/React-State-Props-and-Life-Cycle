@@ -5,7 +5,7 @@ import Loader from './Load-file/Loader';
 class Products extends Component {
     state = { loader: true };
     componentDidMount() {
-            setTimeout(() => this.setState({ loader: false }), 1000);
+            setTimeout(() => this.setState({ loader: false }), 2000);
     }
     render() {
         return (
