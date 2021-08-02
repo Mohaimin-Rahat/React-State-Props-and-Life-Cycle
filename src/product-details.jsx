@@ -1,42 +1,50 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import Loader from './Load-file/Loader';
 import "./Load-file/Loader.css";
 
 
-class ProductDetails extends Component {
-    state = { loader: true };
+const ProductDetails = ({list}) => {
 
-    componentDidMount() {
+    const [loader, setLoader] = useState(true);
+    const {key} = useParams();
+    const history= useHistory();
+    const [currentproduct, setCurrentProduct] = useState();
 
-        setTimeout(() => this.setState({ loader: false }), 1000);
-    }
-    render() {
-        
+    useEffect(() => {
+        setTimeout(() =>setLoader(false),2000);
+        setCurrentProduct(list.find(product =>product.key === key));
+    }, []);
+
+    
+    const backButton= () => {   
+        history.push("/");
+    };
+     
         return (
             <>
-            {this.state.loader ? (
+            {loader ? (
                     <Loader></Loader>
                 ) : (
             <div
-            
                 style={{
                         marginBottom:'100 px',
                         padding:'50px',
                         border:'1px solid green',
                     }}>
-                <p>Product Name: {this.props.currentproduct?.Name }</p>
-                <p>Product Description: {this.props.currentproduct?.Description }</p>
-                <p>Product Price: {this.props.currentproduct?.Price }</p>
-                <p>Product Category: {this.props.currentproduct?.Category }</p>
+                <p>Product Name: {currentproduct?.Name }</p>
+                <p>Product Description: {currentproduct?.Description }</p>
+                <p>Product Price: {currentproduct?.Price }</p>
+                <p>Product Category: {currentproduct?.Category }</p>
 
-                <button onClick={this.props.backButton}>Return</button>
+                <button onClick={backButton}>Return</button>
             </div>
             
             )}
 
           </>
         );  
-    }
+    
 
 
 }
