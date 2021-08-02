@@ -1,20 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import "./Load-file/Loader.css";
 import Loader from './Load-file/Loader';
+import { useHistory } from "react-router-dom";
 
-class Products extends Component {
-    state = { loader: true };
-    componentDidMount() {
-            setTimeout(() => this.setState({ loader: false }), 1000);
-    }
-    render() {
+const Products = ({ list }) => {
+
+    const history = useHistory();
+    const [loader, setLoader] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => setLoader(false), 2000);
+    }, []);
+
+    const selectProduct = (key) => {
+        history.push(`/product-details/${key}`);
+    };
+
         return (
             <>
-            {this.state.loader ? (
+            {loader ? (
                     <Loader></Loader>
                 ) : (
             <div>
-                {this.props.list.map((product) =>{
+                {list.map((product, index) =>{
                   return(
                      <div
                       style={{
@@ -22,7 +30,8 @@ class Products extends Component {
                         padding:'20px',
                         border:'1px solid green',
                     }}
-                        onClick={()=> this.props.selectProduct(product)}>
+                        key={index}
+                        onClick={()=>selectProduct(index)}>
                             <p>Product Name: {product.Name}</p>
                          </div>
                   )
@@ -32,7 +41,7 @@ class Products extends Component {
             )}
            </>   
         );
-    }
+    
 }
 
 export default Products;
