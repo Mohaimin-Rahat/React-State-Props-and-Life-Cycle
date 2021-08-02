@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { useState } from "react";
+import "./App.css";
 import Products from "./products.jsx";
 import ProductDetails from "./product-details.jsx";
-import "./App.css";
+import { Switch, Route } from "react-router-dom";
 
 
-class App extends Component {
-    state={
-      currentproduct:null,
-      list: [
+function App() {
+  const [ list, setList] = useState(
+       [
         {
           Name:'Coca-cola',
           Description:'2 Liters',
@@ -26,45 +26,34 @@ class App extends Component {
           Price: '85',
           Category: 'Cocolate'
         },
-      ],
-     
-      
-    };
-   
+      ] 
+  );
 
-    selectProduct = (data) =>{
-      this.setState({...this.state,currentproduct :data});
-      
-    };
-
-    backButton=()=>{
-      this.setState({...this.State,currentproduct : null});
-      
-    };
-
-    
-  render() {
     return (
       <div>
-        { !this.state.currentproduct ? (
-                  < Products 
-                  list={this.state.list} 
-                  selectProduct={this.selectProduct}
-               
-                 />
-        
-        ) : (
-          <ProductDetails 
-          currentproduct={this.state.currentproduct} 
-          backButton={this.backButton}
-         
-          />
-      
-       )}
-      </div>
+           
+               <Switch>
+                     <Route exact path="/">
+                          <Products list={list}></Products>
+                    </Route>
+                    <Route path="/products">
+                        <Products list={list}></Products>
+                    </Route>
+                    <Route path="/product-details/:key">
+                        <ProductDetails list={list}></ProductDetails>
+                    </Route>
+                    <Route  path="*">
+                         <h1>404</h1>
+                         <h2>Page Not Found</h2>
+                    </Route>
+                </Switch>
+            
+        </div>
     );
-  }
+  
 }
 
 
 export default App;
+
+
